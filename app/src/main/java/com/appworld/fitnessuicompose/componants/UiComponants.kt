@@ -1,25 +1,31 @@
 package com.appworld.fitnessuicompose.componants
 
-import android.provider.CalendarContract.Colors
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -31,7 +37,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -45,6 +50,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.ui.theme.buttonPink
 import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
@@ -118,7 +124,6 @@ fun TermsAndConditionsText(
             addStringAnnotation("URL", "terms", 47, 66)
         }
 
-
         ClickableText(
             text = text,
             onClick = { offset ->
@@ -149,7 +154,7 @@ fun OtpTextComponent(
             color = Color.Black
         ),
 
-    )
+        )
     val activeCellConfig = OhTeePeeCellConfiguration.withDefaults(
         borderColor = buttonPink,
         borderWidth = 1.sdp,
@@ -157,7 +162,6 @@ fun OtpTextComponent(
         textStyle = TextStyle(
             color = Color.Black
         ),
-
 
         )
 
@@ -179,26 +183,69 @@ fun OtpTextComponent(
 //            obscureText = "*"
         ),
 
-    )
+        )
 
-//    var otpvalue by remember { mutableStateOf("") }
-//
-//    BasicTextField(
-//        value = otpvalue,
-//        onValueChange = {
-//            if (it.length <= 6){
-//                otpvalue = it
-//                onTextChange(it)
-//            }
-//
-//        },
-//        keyboardOptions = KeyboardOptions(
-//            keyboardType = KeyboardType.NumberPassword
-//        )
-//    ) {
-//
-//
-//    }
+}
+
+@Composable
+fun ElevatedCardComponant(
+    paddingStart: Dp = 0.sdp,
+    paddingTop: Dp = 0.sdp,
+    paddingEnd: Dp = 0.sdp,
+    paddingBottom: Dp = 0.sdp,
+    paddingHorizontal: Dp = 0.sdp,
+    paddingVertical: Dp = 0.sdp,
+    padding: Dp = 0.sdp,
+) {
+    val listNum = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9",)
+    Card(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp
+        ),
+        modifier = Modifier
+            .padding(
+                start = paddingStart,
+                top = paddingTop,
+                end = paddingEnd,
+                bottom = paddingBottom
+            )
+            .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
+            .fillMaxWidth()
+            .height(45.sdp),
+
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+
+        Row(
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
+                .padding(start = 10.dp)
+        ) {
+            for (i in listNum) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(end = 10.dp),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Surface(
+                        shape = CircleShape, shadowElevation = 2.dp,
+                    ) {
+                        Text(
+                            text = i,
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+                            fontSize = 10.ssp
+                        )
+                    }
+                }
+            }
+
+        }
+
+
+    }
 }
 
 @Composable
@@ -402,9 +449,8 @@ fun Preview() {
         SimpleImageView()
 //        SimpleEditText()
         SimpleButton() {}
-        OtpTextComponent(){
-
-        }
+        OtpTextComponent() {}
+        ElevatedCardComponant()
     }
 
 }
