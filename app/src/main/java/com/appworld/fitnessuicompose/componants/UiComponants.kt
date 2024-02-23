@@ -233,9 +233,10 @@ fun ElevatedCardComponant(
                     Surface(
                         shape = CircleShape, shadowElevation = 2.dp,
                     ) {
-                        Text(
+                        SimpleTextComponent(
                             text = i,
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+                            paddingHorizontal = 10.dp,
+                            paddingVertical = 5.dp,
                             fontSize = 10.ssp
                         )
                     }

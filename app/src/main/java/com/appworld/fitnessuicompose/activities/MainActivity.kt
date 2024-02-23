@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.componants.ElevatedCardComponant
+import com.appworld.fitnessuicompose.componants.MainScreenPreview
 import com.appworld.fitnessuicompose.componants.SimpleTextComponent
 import com.appworld.fitnessuicompose.ui.theme.FitnessUiComposeTheme
 import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
@@ -188,6 +189,8 @@ fun MainPreview() {
                         )
 
                         ElevatedCardComponant(paddingTop = 10.sdp)
+
+                        MainScreenPreview()
                     }
                 }
 
