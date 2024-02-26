@@ -40,7 +40,7 @@ import com.appworld.fitnessuicompose.componants.SimpleTextComponent
 import com.appworld.fitnessuicompose.componants.SimpleWorkout
 import com.appworld.fitnessuicompose.ui.theme.FitnessUiComposeTheme
 import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
-import com.appworld.fitnessuicompose.ui.theme.lightPink
+import com.appworld.fitnessuicompose.ui.theme.lightestPink
 import com.appworld.fitnessuicompose.ui.theme.textTitleColor
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
@@ -104,7 +104,7 @@ class MainActivity : ComponentActivity() {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .background(lightPink)
+                                    .background(lightestPink)
                                     .padding(horizontal = 18.sdp)
                                     .padding(top = 20.sdp ),
                             ) {
@@ -199,7 +199,7 @@ fun MainPreview() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(lightPink)
+                            .background(lightestPink)
                             .padding(horizontal = 12.sdp)
                             .padding(top = 20.sdp ),
                     ) {
