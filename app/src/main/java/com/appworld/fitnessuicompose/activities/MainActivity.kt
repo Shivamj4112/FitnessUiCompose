@@ -1,5 +1,6 @@
 package com.appworld.fitnessuicompose.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,11 +15,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,9 +32,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.appworld.fitnessuicompose.R
+import com.appworld.fitnessuicompose.componants.BluetoothWorkout
 import com.appworld.fitnessuicompose.componants.ElevatedCardComponant
-import com.appworld.fitnessuicompose.componants.MainScreenPreview
+import com.appworld.fitnessuicompose.componants.HorizontalMaterial
+import com.appworld.fitnessuicompose.componants.MaterialWorkout
 import com.appworld.fitnessuicompose.componants.SimpleTextComponent
+import com.appworld.fitnessuicompose.componants.SimpleWorkout
 import com.appworld.fitnessuicompose.ui.theme.FitnessUiComposeTheme
 import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
 import com.appworld.fitnessuicompose.ui.theme.lightPink
@@ -98,7 +105,8 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .background(lightPink)
-                                    .padding(horizontal = 18.sdp, vertical = 20.sdp),
+                                    .padding(horizontal = 18.sdp)
+                                    .padding(top = 20.sdp ),
                             ) {
 
                                 SimpleTextComponent(
@@ -108,13 +116,26 @@ class MainActivity : ComponentActivity() {
                                 )
 
                                 ElevatedCardComponant(paddingTop = 10.sdp)
+
+                                val state = rememberScrollState()
+//                                LaunchedEffect(Unit) { state.animateScrollTo(100) }
+                                Column(modifier = Modifier
+                                    .padding(bottom = 10.sdp)
+                                    .verticalScroll(state)
+                                    .fillMaxSize()
+                                    .padding(top = 20.sdp)) {
+
+                                    SimpleWorkout()
+                                    MaterialWorkout(paddingTop = 20.sdp , titleText = "Quads & Deltoids", bodyText = "7 Exercises completed")
+                                    BluetoothWorkout(paddingTop = 10.sdp , titleText = "Connect your device", bodyText = "Bluetooth" ){
+
+                                        startActivity(Intent(this@MainActivity,BluetoothActivity::class.java))
+                                    }
+                                    HorizontalMaterial(paddingTop = 10.sdp, paddingEnd = 5.sdp , titleText = "Push up Routing" , bodyText = "12 Exercises")
+                                }
                             }
                         }
-
-
                     }
-
-
                 }
             }
         }
@@ -179,7 +200,8 @@ fun MainPreview() {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(lightPink)
-                            .padding(horizontal = 18.sdp, vertical = 20.sdp),
+                            .padding(horizontal = 12.sdp)
+                            .padding(top = 20.sdp ),
                     ) {
 
                         SimpleTextComponent(
@@ -190,14 +212,22 @@ fun MainPreview() {
 
                         ElevatedCardComponant(paddingTop = 10.sdp)
 
-                        MainScreenPreview()
+                        val state = rememberScrollState()
+                        LaunchedEffect(Unit) { state.animateScrollTo(100) }
+                        Column(modifier = Modifier
+                            .verticalScroll(state)
+                            .fillMaxSize()
+                            .padding(top = 20.sdp)) {
+
+                            SimpleWorkout()
+                            MaterialWorkout(paddingTop = 20.sdp , titleText = "Quads & Deltoids", bodyText = "7 Exercises completed")
+                            BluetoothWorkout(paddingTop = 10.sdp , titleText = "Connect your device", bodyText = "Bluetooth" ){}
+                            HorizontalMaterial(paddingTop = 10.sdp, paddingEnd = 5.sdp , titleText = "Push up Routing" , bodyText = "12 Exercises")
+                        }
+
                     }
                 }
-
-
             }
-
-
         }
     }
 }

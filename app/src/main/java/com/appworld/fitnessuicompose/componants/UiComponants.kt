@@ -408,6 +408,7 @@ fun SimpleButton(
     ) {
 
     Button(
+
         modifier = Modifier
             .fillMaxWidth()
             .padding(all = padding)

@@ -8,6 +8,7 @@ val Pink80 = Color(0xFFEFB8C8)
 val lightGrey = Color(0xFFA8AFBF)
 val lightPink = Color(0xFFF4F4F6)
 val buttonPink = Color(0xFFE4447C)
+val darkPink = Color(0xFF3D1323)
 val textTitleColor = Color(0xFF454F63)
 
 
