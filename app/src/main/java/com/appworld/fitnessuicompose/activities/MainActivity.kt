@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -66,7 +67,9 @@ class MainActivity : ComponentActivity() {
                                     .padding(horizontal = 15.sdp, vertical = 10.sdp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Column(modifier = Modifier) {
+                                Column(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .weight(1f)) {
                                     SimpleTextComponent(
                                         text = "Hello",
                                         fontSize = 18.ssp,
@@ -80,19 +83,22 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                                 Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
+                                    modifier = Modifier,
                                     contentAlignment = Alignment.CenterEnd
                                 ) {
                                     Image(
                                         modifier = Modifier
                                             .size(45.sdp)
-                                            .clip(shape = CircleShape),
+                                            .clip(shape = CircleShape)
+                                            .clickable(enabled = true, onClick = {
+                                                startActivity(Intent(this@MainActivity,ProfileActivity::class.java))
+                                            }),
                                         painter = painterResource(id = R.drawable.intro_img),
                                         contentDescription = null,
                                         contentScale = ContentScale.Crop,
-                                        alignment = Alignment.CenterEnd
-                                    )
+                                        alignment = Alignment.CenterEnd,
+
+                                        )
                                 }
                             }
                         }
@@ -105,7 +111,7 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .background(lightestPink)
-                                    .padding(horizontal = 18.sdp)
+                                    .padding(horizontal = 12.sdp)
                                     .padding(top = 20.sdp ),
                             ) {
 
@@ -118,9 +124,8 @@ class MainActivity : ComponentActivity() {
                                 ElevatedCardComponant(paddingTop = 10.sdp)
 
                                 val state = rememberScrollState()
-//                                LaunchedEffect(Unit) { state.animateScrollTo(100) }
+                                LaunchedEffect(Unit) { state.animateScrollTo(100) }
                                 Column(modifier = Modifier
-                                    .padding(bottom = 10.sdp)
                                     .verticalScroll(state)
                                     .fillMaxSize()
                                     .padding(top = 20.sdp)) {
@@ -128,11 +133,11 @@ class MainActivity : ComponentActivity() {
                                     SimpleWorkout()
                                     MaterialWorkout(paddingTop = 20.sdp , titleText = "Quads & Deltoids", bodyText = "7 Exercises completed")
                                     BluetoothWorkout(paddingTop = 10.sdp , titleText = "Connect your device", bodyText = "Bluetooth" ){
-
                                         startActivity(Intent(this@MainActivity,BluetoothActivity::class.java))
                                     }
                                     HorizontalMaterial(paddingTop = 10.sdp, paddingEnd = 5.sdp , titleText = "Push up Routing" , bodyText = "12 Exercises")
                                 }
+
                             }
                         }
                     }
@@ -161,7 +166,9 @@ fun MainPreview() {
                             .padding(horizontal = 15.sdp, vertical = 10.sdp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column(modifier = Modifier) {
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)) {
                             SimpleTextComponent(
                                 text = "Hello",
                                 fontSize = 18.ssp,
@@ -175,8 +182,7 @@ fun MainPreview() {
                             )
                         }
                         Box(
-                            modifier = Modifier
-                                .fillMaxWidth(),
+                            modifier = Modifier,
                             contentAlignment = Alignment.CenterEnd
                         ) {
                             Image(
@@ -186,7 +192,8 @@ fun MainPreview() {
                                 painter = painterResource(id = R.drawable.intro_img),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
-                                alignment = Alignment.CenterEnd
+                                alignment = Alignment.CenterEnd,
+
                             )
                         }
                     }

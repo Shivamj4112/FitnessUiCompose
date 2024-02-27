@@ -64,6 +64,7 @@ class BluetoothActivity : ComponentActivity() {
                             Column(
                                 modifier = Modifier
                                     .padding(it)
+                                    .padding(top = 10.sdp)
                                     .fillMaxSize(),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.SpaceBetween
@@ -212,6 +213,7 @@ fun BluetoothPreview() {
             Column(
                 modifier = Modifier
                     .padding(it)
+                    .padding(top = 10.sdp)
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween

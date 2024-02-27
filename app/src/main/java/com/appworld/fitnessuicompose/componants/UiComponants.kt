@@ -86,19 +86,6 @@ fun AppToolBar(
                 )
 
         },
-        actions = {
-            Icon(
-                imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "Arrow Back",
-                modifier = Modifier
-                    .padding(start = 5.sdp, top = 3.sdp)
-//                    .padding(vertical = 8.sdp)
-                    .size(size)
-                    .clickable(enabled = true, onClick = onClick),
-
-                )
-
-        },
         modifier = Modifier.height(50.sdp),
 
         )

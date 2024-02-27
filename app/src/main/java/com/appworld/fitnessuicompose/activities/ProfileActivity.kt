@@ -3,6 +3,7 @@ package com.appworld.fitnessuicompose.activities
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +32,7 @@ import ir.kaaveh.sdpcompose.ssp
 
 class ProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             FitnessUiComposeTheme {
@@ -48,11 +50,26 @@ class ProfileActivity : ComponentActivity() {
                         }
                     ) {
                         Column(modifier = Modifier
-                            .padding(it)) {
+                            .padding(it)
+                            .fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally) {
+
+                            Image(modifier = Modifier
+                                .height(90.sdp)
+                                .width(90.sdp)
+                                .clip(shape = CircleShape),
+                                contentScale = ContentScale.Crop,
+                                painter = painterResource(id = R.drawable.intro_img),
+                                contentDescription = null)
+
+                            SimpleTextComponent(text = "Jhon Smith", fontSize = 18.ssp, paddingTop = 10.sdp, color = textTitleColor)
+                            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp, paddingTop = 10.sdp)
+
+                            UserDetails(paddingTop = 30.sdp, paddingHorizontal = 20.sdp)
 
                         }
 
-                        
+
                     }
                 }
             }
@@ -78,17 +95,17 @@ fun ProfilePreview(){
             horizontalAlignment = Alignment.CenterHorizontally) {
 
             Image(modifier = Modifier
-                .height(110.sdp)
-                .width(110.sdp)
+                .height(90.sdp)
+                .width(90.sdp)
                 .clip(shape = CircleShape),
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.intro_img),
                 contentDescription = null)
 
             SimpleTextComponent(text = "Jhon Smith", fontSize = 18.ssp, paddingTop = 10.sdp, color = textTitleColor)
-            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp, paddingTop = 10.sdp)
+            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp, paddingTop = 5.sdp)
 
-            UserDetails(paddingTop = 30.sdp, paddingHorizontal = 20.sdp)
+            UserDetails(paddingTop = 20.sdp, paddingHorizontal = 15.sdp)
 
         }
 

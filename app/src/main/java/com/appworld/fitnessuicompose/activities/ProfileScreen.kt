@@ -78,7 +78,7 @@ fun UserDetails(
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(70.sdp),
+                .height(60.sdp),
         ) {
 
             Row(
@@ -92,7 +92,7 @@ fun UserDetails(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                         SimpleTextComponent(text = "178 cm", color = Color.White , fontSize = 16.ssp)
-                        SimpleTextComponent(text = "Height", color = lightPink)
+                        SimpleTextComponent(text = "Height", color = lightPink, fontSize = 13.ssp)
                 }
                 Divider(
                     color = lightPink,
@@ -104,7 +104,7 @@ fun UserDetails(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     SimpleTextComponent(text = "24", color = Color.White , fontSize = 16.ssp)
-                    SimpleTextComponent(text = "Year old", color = lightPink)
+                    SimpleTextComponent(text = "Year old", color = lightPink, fontSize = 13.ssp)
                 }
                 Divider(
                     color = lightPink,
@@ -116,7 +116,7 @@ fun UserDetails(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     SimpleTextComponent(text = "78 kg", color = Color.White , fontSize = 16.ssp)
-                    SimpleTextComponent(text = "Weight", color = lightPink)
+                    SimpleTextComponent(text = "Weight", color = lightPink, fontSize = 13.ssp)
                 }
 
             }
