@@ -1,5 +1,6 @@
 package com.appworld.fitnessuicompose.componants
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,19 +26,19 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.ui.theme.buttonPink
+import com.appworld.fitnessuicompose.ui.theme.lightGrey
 import com.appworld.fitnessuicompose.ui.theme.lightPink
+import com.appworld.fitnessuicompose.ui.theme.textTitleColor
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
@@ -150,56 +151,6 @@ fun TopBar(
         )
 }
 
-
-//@Composable
-//fun ProfileButton(
-//    id: String,
-//    paddingStart: Dp = 0.sdp,
-//    paddingTop: Dp = 0.sdp,
-//    paddingEnd: Dp = 0.sdp,
-//    paddingBottom: Dp = 0.sdp,
-//    paddingHorizontal: Dp = 0.sdp,
-//    paddingVertical: Dp = 0.sdp,
-//    padding: Dp = 0.sdp,
-//    text: String = "",
-//    textPaddingVertical: Dp = 3.sdp,
-//    textSize: TextUnit = 14.ssp,
-//    textColor: Color = Color.White,
-//    selectedId: String = "bt_badges",
-//    onClick: () -> Unit,
-//
-//    ) {
-//    var currentSelectedId by remember { mutableStateOf(selectedId) }
-//    Button(
-//        modifier = Modifier
-//            .wrapContentSize()
-//            .padding(all = padding)
-//            .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
-//            .padding(
-//                start = paddingStart,
-//                top = paddingTop,
-//                end = paddingEnd,
-//                bottom = paddingBottom
-//            ),
-//        shape = RoundedCornerShape(10.sdp),
-//        onClick = {
-//            currentSelectedId = id
-//            onClick()
-//        },
-//
-//        colors = ButtonDefaults.buttonColors(
-//            containerColor = if (currentSelectedId == id) buttonPink else lightPink
-//        ),
-//    )
-//    {
-//        SimpleTextComponent(
-//            text = text,
-//            color = if (currentSelectedId == id) Color.White else buttonPink,
-//            fontSize = textSize,
-//            paddingVertical = textPaddingVertical,
-//        )
-//    }
-//}
 @Composable
 fun ProfileButton(
     id: String,
@@ -243,6 +194,66 @@ fun ProfileButton(
     }
 }
 
+@Composable
+fun BadgesLayout(
+    paddingStart: Dp = 0.sdp,
+    paddingTop: Dp = 0.sdp,
+    paddingEnd: Dp = 0.sdp,
+    paddingBottom: Dp = 0.sdp,
+    paddingHorizontal: Dp = 0.sdp,
+    paddingVertical: Dp = 0.sdp,
+    padding: Dp = 0.sdp,
+    textTitle: String = "Text Title",
+    textBody: String = "Text Body",
+    textDate: String = "Text Date",
+    textTime: String = "Text Time",
+    image: Int = R.drawable.ic_exercise,
+) {
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = padding)
+            .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
+            .padding(
+                start = paddingStart,
+                top = paddingTop,
+                end = paddingEnd,
+                bottom = paddingBottom
+            )
+            .height(110.sdp)
+
+            .background(color = lightPink, shape = RoundedCornerShape(50f)),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+
+        Image(
+            modifier = Modifier
+                .padding(start = 20.sdp)
+                .size(50.sdp),
+
+            painter = painterResource(id = image),
+            contentDescription = null
+        )
+        Column(modifier = Modifier
+            .padding(start = 20.sdp)
+            .padding(vertical = 15.sdp)
+            .fillMaxSize()) {
+
+            SimpleTextComponent(text = textTitle, color = textTitleColor, fontSize = 18.ssp)
+            SimpleTextComponent(text = textBody, color = lightGrey  , fontSize = 14.ssp)
+
+            Row (modifier = Modifier
+                .padding(top = 20.sdp)){
+                SimpleTextComponent(text = textDate, color = lightGrey, fontSize = 14.ssp)
+                SimpleTextComponent(text = textTime, color = lightGrey  , fontSize = 14.ssp, paddingStart = 10.sdp)
+            }
+
+        }
+
+    }
+
+}
 
 
 @Preview(showSystemUi = true)
@@ -252,9 +263,9 @@ fun ProfileScreenPreview() {
     Column {
         TopBar() {}
         UserDetails()
-        ProfileButton(id = "") {
+        ProfileButton(id = "") {}
+        BadgesLayout()
 
-        }
     }
 
 
