@@ -393,7 +393,7 @@ fun SimpleEditText(
 }
 
 @Composable
-fun SimpleButton(
+fun     SimpleButton(
     paddingStart: Dp = 0.sdp,
     paddingTop: Dp = 0.sdp,
     paddingEnd: Dp = 0.sdp,

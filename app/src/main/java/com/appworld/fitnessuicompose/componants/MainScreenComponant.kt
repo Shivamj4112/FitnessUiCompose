@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,6 +26,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,6 +45,7 @@ import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.ui.theme.buttonPink
 import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
 import com.appworld.fitnessuicompose.ui.theme.darkPink
+import com.appworld.fitnessuicompose.ui.theme.lightPink
 import com.appworld.fitnessuicompose.ui.theme.textTitleColor
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
@@ -124,7 +130,7 @@ fun SimpleWorkout(
             contentAlignment = Alignment.BottomEnd
         ) {
 
-            SmallButton(text = "START") {
+            SmallButton(text = "START", id = "bt_start") {
 
             }
 
@@ -434,6 +440,7 @@ fun HorizontalMaterial(
 
 @Composable
 fun SmallButton(
+    id : String,
     paddingStart: Dp = 0.sdp,
     paddingTop: Dp = 0.sdp,
     paddingEnd: Dp = 0.sdp,
@@ -442,6 +449,8 @@ fun SmallButton(
     paddingVertical: Dp = 0.sdp,
     padding: Dp = 0.sdp,
     text: String = "",
+    textPaddingVertical: Dp = 3.sdp,
+    textSize : TextUnit = 14.ssp,
     textColor: Color = Color.White,
     onClick: () -> Unit,
 
@@ -449,8 +458,7 @@ fun SmallButton(
 
     Button(
         modifier = Modifier
-
-            .wrapContentWidth()
+            .wrapContentSize()
             .padding(all = padding)
             .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
             .padding(
@@ -467,7 +475,8 @@ fun SmallButton(
         SimpleTextComponent(
             text = text,
             color = textColor,
-            paddingVertical = 3.sdp,
+            fontSize = textSize,
+            paddingVertical = textPaddingVertical,
         )
     }
 }

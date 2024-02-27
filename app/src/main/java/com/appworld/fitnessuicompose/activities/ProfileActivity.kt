@@ -5,17 +5,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,8 +29,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.appworld.fitnessuicompose.R
-import com.appworld.fitnessuicompose.componants.AppToolBar
+import com.appworld.fitnessuicompose.componants.ProfileButton
+import com.appworld.fitnessuicompose.componants.SimpleButton
 import com.appworld.fitnessuicompose.componants.SimpleTextComponent
+import com.appworld.fitnessuicompose.componants.SmallButton
+import com.appworld.fitnessuicompose.componants.TopBar
+import com.appworld.fitnessuicompose.componants.UserDetails
 import com.appworld.fitnessuicompose.ui.theme.FitnessUiComposeTheme
 import com.appworld.fitnessuicompose.ui.theme.textTitleColor
 import ir.kaaveh.sdpcompose.sdp
@@ -55,17 +65,36 @@ class ProfileActivity : ComponentActivity() {
                             horizontalAlignment = Alignment.CenterHorizontally) {
 
                             Image(modifier = Modifier
-                                .height(90.sdp)
-                                .width(90.sdp)
+                                .height(80.sdp)
+                                .width(80.sdp)
                                 .clip(shape = CircleShape),
                                 contentScale = ContentScale.Crop,
                                 painter = painterResource(id = R.drawable.intro_img),
                                 contentDescription = null)
 
                             SimpleTextComponent(text = "Jhon Smith", fontSize = 18.ssp, paddingTop = 10.sdp, color = textTitleColor)
-                            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp, paddingTop = 10.sdp)
+                            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp,)
 
-                            UserDetails(paddingTop = 30.sdp, paddingHorizontal = 20.sdp)
+                            UserDetails(paddingTop = 20.sdp, paddingHorizontal = 15.sdp)
+
+                            var currentSelectedId: String by remember { mutableStateOf("bt_badges") }
+                            Row (modifier = Modifier
+                                .padding(horizontal = 15.sdp)
+                                .padding(top = 20.sdp)
+                                .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween){
+
+                                ProfileButton(id = "bt_badges", selectedId = currentSelectedId,text = "BADGES", textSize = 12.ssp, textPaddingVertical = 5.sdp) {clickedId->
+
+                                    currentSelectedId = clickedId
+                                }
+                                ProfileButton(id = "bt_history", selectedId = currentSelectedId,text = "HISTORY", textSize = 12.ssp, textPaddingVertical = 5.sdp) {clickedId->
+                                    currentSelectedId = clickedId
+                                }
+                                ProfileButton(id = "bt_stats", selectedId = currentSelectedId,text = "STATS", textSize = 12.ssp, textPaddingVertical = 5.sdp) {clickedId->
+                                    currentSelectedId = clickedId
+                                }
+                            }
 
                         }
 
@@ -95,17 +124,37 @@ fun ProfilePreview(){
             horizontalAlignment = Alignment.CenterHorizontally) {
 
             Image(modifier = Modifier
-                .height(90.sdp)
-                .width(90.sdp)
+                .height(80.sdp)
+                .width(80.sdp)
                 .clip(shape = CircleShape),
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.intro_img),
                 contentDescription = null)
 
             SimpleTextComponent(text = "Jhon Smith", fontSize = 18.ssp, paddingTop = 10.sdp, color = textTitleColor)
-            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp, paddingTop = 5.sdp)
+            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp,)
 
             UserDetails(paddingTop = 20.sdp, paddingHorizontal = 15.sdp)
+
+            Row (modifier = Modifier
+                .padding(horizontal = 15.sdp)
+                .padding(top = 20.sdp)
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween){
+
+                ProfileButton(id = "bt_badges",text = "BADGES", textSize = 12.ssp, textPaddingVertical = 5.sdp) {
+
+                }
+                ProfileButton(id = "bt_history",text = "HISTORY", textSize = 12.ssp, textPaddingVertical = 5.sdp) {
+
+                }
+                ProfileButton(id = "bt_stats",text = "STATS", textSize = 12.ssp, textPaddingVertical = 5.sdp) {
+
+                }
+
+
+
+            }
 
         }
 
