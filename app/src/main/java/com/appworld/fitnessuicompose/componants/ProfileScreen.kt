@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -208,6 +209,7 @@ fun BadgesLayout(
     textDate: String = "Text Date",
     textTime: String = "Text Time",
     image: Int = R.drawable.ic_exercise,
+    onClick: () -> Unit,
 ) {
 
     Row(
@@ -222,8 +224,8 @@ fun BadgesLayout(
                 bottom = paddingBottom
             )
             .height(90.sdp)
-
-            .background(color = lightPink, shape = RoundedCornerShape(50f)),
+            .background(color = lightPink, shape = RoundedCornerShape(50f))
+            .clickable(enabled = true, onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
     ) {
 
@@ -267,8 +269,8 @@ fun HistoryLayout(
     textTitle: String = "Text Title",
     textBody: String = "Text Body",
     textDate: String = "Text Date",
-    textTime: String = "Text Time",
-    image: Int = R.drawable.ic_exercise,
+    textMonth: String = "Text Month",
+    onClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -281,34 +283,32 @@ fun HistoryLayout(
                 end = paddingEnd,
                 bottom = paddingBottom
             )
-            .height(90.sdp)
-
-            .background(color = lightPink, shape = RoundedCornerShape(50f)),
+            .height(70.sdp)
+            .background(color = lightPink, shape = RoundedCornerShape(50f))
+            .clickable(enabled = true, onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
     ) {
 
-        Image(
+        Column(
             modifier = Modifier
                 .padding(start = 20.sdp)
-                .size(50.sdp),
-
-            painter = painterResource(id = image),
-            contentDescription = null
-        )
+                .size(40.sdp)
+                .background(color = buttonPink, shape = RoundedCornerShape(5.sdp)),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            SimpleTextComponent(text = "12", color = Color.White, fontSize = 15.ssp)
+            SimpleTextComponent(text = "AUG", color = Color.White, fontSize = 8.ssp)
+        }
         Column(modifier = Modifier
             .padding(start = 20.sdp)
             .padding(vertical = 15.sdp)
-            .fillMaxSize()) {
+            .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,) {
 
             SimpleTextComponent(text = textTitle, color = textTitleColor, fontSize = 15.ssp)
-            SimpleTextComponent(text = textBody, color = lightGrey  , fontSize = 10.ssp)
-
-            Row (modifier = Modifier
-                .padding(top = 15.sdp)){
-                SimpleTextComponent(text = textDate, color = lightGrey, fontSize = 12.ssp)
-                SimpleTextComponent(text = textTime, color = lightGrey  , fontSize = 12.ssp, paddingStart = 10.sdp)
-            }
-
+            SimpleTextComponent(text = textBody, color = lightGrey  , fontSize = 10.ssp,paddingTop = 5.sdp)
+            
         }
 
     }
@@ -324,7 +324,8 @@ fun ProfileScreenPreview() {
         TopBar() {}
         UserDetails()
         ProfileButton(id = "") {}
-        BadgesLayout()
+        BadgesLayout(){}
+        HistoryLayout(paddingTop = 10.sdp){}
 
     }
 

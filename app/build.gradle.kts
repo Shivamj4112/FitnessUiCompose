@@ -76,4 +76,7 @@ dependencies {
 
     implementation ("com.github.composeuisuite:ohteepee:1.0.3")
 
+    // Line Graph
+    implementation ("io.github.farshidroohi:lineGraph:1.0.2")
+
 }

@@ -33,11 +33,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.componants.BadgesLayout
+import com.appworld.fitnessuicompose.componants.HistoryLayout
 import com.appworld.fitnessuicompose.componants.ProfileButton
 import com.appworld.fitnessuicompose.componants.SimpleTextComponent
 import com.appworld.fitnessuicompose.componants.TopBar
 import com.appworld.fitnessuicompose.componants.UserDetails
 import com.appworld.fitnessuicompose.model.BadgeItem
+import com.appworld.fitnessuicompose.model.HistoryItem
 import com.appworld.fitnessuicompose.ui.theme.FitnessUiComposeTheme
 import com.appworld.fitnessuicompose.ui.theme.textTitleColor
 import ir.kaaveh.sdpcompose.sdp
@@ -119,7 +121,6 @@ class ProfileActivity : ComponentActivity() {
                                 currentSelectedId = clickedId
                             }
                         }
-
                         val data = listOf(
                             BadgeItem("Best Workout", "27 exercises completed", "10/08/2020", "17:24", R.drawable.ic_exercise),
                             BadgeItem("Workout of the week", "727 exercises completed", "07/08/2020", "12:11", R.drawable.ic_bike),
@@ -127,17 +128,43 @@ class ProfileActivity : ComponentActivity() {
                             BadgeItem("Best of Yoga", "359 exercises completed", "24/07/2020", "15:02", R.drawable.ic_yoga),
                         )
 
-                        LazyColumn (modifier = Modifier.padding(top = 20.sdp)){
-                            items(data) { item ->
-                                BadgesLayout(
-                                    textTitle = item.title,
-                                    textBody = item.body,
-                                    textDate = item.date,
-                                    textTime = item.time,
-                                    image = item.image,
-                                    paddingHorizontal = 15.sdp,
-                                    paddingBottom = 10.sdp
-                                )
+                        val dataHistory = listOf(
+                            HistoryItem("Best Workout", "27 exercises completed", "10/08/2020", "17:24"),
+                            HistoryItem("Workout of the week", "727 exercises completed", "07/08/2020", "12:11"),
+                            HistoryItem("99 days", "45 exercises completed", "03/08/2020", "07:39"),
+                            HistoryItem("Best of Yoga", "359 exercises completed", "24/07/2020", "15:02"),
+                        )
+
+                        if (currentSelectedId == "bt_badges") {
+                            LazyColumn (modifier = Modifier.padding(top = 20.sdp)){
+                                items(data) { item ->
+                                    BadgesLayout(
+                                        textTitle = item.title,
+                                        textBody = item.body,
+                                        textDate = item.date,
+                                        textTime = item.time,
+                                        image = item.image,
+                                        paddingHorizontal = 15.sdp,
+                                        paddingBottom = 10.sdp
+                                    ){
+                                        Toast.makeText(this@ProfileActivity, item.title+" Clicked!", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        } else if (currentSelectedId == "bt_history") {
+                            LazyColumn (modifier = Modifier.padding(top = 20.sdp)){
+                                items(dataHistory) { item ->
+                                    HistoryLayout(
+                                        textTitle = item.title,
+                                        textBody = item.body,
+                                        textDate = item.date,
+                                        textMonth = item.month,
+                                        paddingHorizontal = 15.sdp,
+                                        paddingBottom = 10.sdp
+                                    ){
+                                        Toast.makeText(this@ProfileActivity, item.title+" Clicked!", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
                             }
                         }
 
@@ -222,7 +249,7 @@ fun ProfilePreview() {
                 }
             }
 
-            val data = listOf(
+            val dataBadge = listOf(
                 BadgeItem("Best Workout", "27 exercises completed", "10/08/2020", "17:24", R.drawable.ic_exercise),
                 BadgeItem("Workout of the week", "727 exercises completed", "07/08/2020", "12:11", R.drawable.ic_bike),
                 BadgeItem("99 days", "45 exercises completed", "03/08/2020", "07:39", R.drawable.ic_weightlifting),
@@ -230,7 +257,7 @@ fun ProfilePreview() {
             )
 
             LazyColumn (modifier = Modifier.padding(top = 20.sdp)){
-                items(data) { item ->
+                items(dataBadge) { item ->
                     BadgesLayout(
                         textTitle = item.title,
                         textBody = item.body,
@@ -239,11 +266,11 @@ fun ProfilePreview() {
                         image = item.image,
                         paddingHorizontal = 15.sdp,
                         paddingBottom = 10.sdp
-                    )
+                    ){}
                 }
             }
+
+
         }
-
-
     }
 }
