@@ -18,11 +18,6 @@
             android:label="@string/title_activity_setting"
             android:theme="@style/Theme.FitnessUiCompose" />
 
-        <receiver
-            android:name=".activities.MyReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".activities.ProfileActivity"
             android:exported="false"
@@ -54,7 +49,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.FitnessUiCompose" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.IntroActivity"
             android:exported="true"
             android:theme="@style/Theme.FitnessUiCompose">
             <intent-filter>
@@ -64,7 +59,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.IntroActivity"
+            android:name=".activities.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.FitnessUiCompose" />
     </application>
