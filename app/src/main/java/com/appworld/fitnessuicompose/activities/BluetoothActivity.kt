@@ -206,10 +206,7 @@ fun BluetoothPreview() {
                 })
         }
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-        ) {
+
             Column(
                 modifier = Modifier
                     .padding(it)
@@ -336,6 +333,6 @@ fun BluetoothPreview() {
             }
 
 
-        }
+
     }
 }

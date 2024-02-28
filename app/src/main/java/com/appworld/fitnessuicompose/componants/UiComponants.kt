@@ -4,9 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -30,11 +32,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -55,6 +60,7 @@ import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.ui.theme.buttonPink
 import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
 import com.appworld.fitnessuicompose.ui.theme.lightGrey
+import com.appworld.fitnessuicompose.ui.theme.textTitleColor
 import com.composeuisuite.ohteepee.OhTeePeeInput
 import com.composeuisuite.ohteepee.configuration.OhTeePeeCellConfiguration
 import com.composeuisuite.ohteepee.configuration.OhTeePeeConfigurations
@@ -66,9 +72,10 @@ import ir.kaaveh.sdpcompose.ssp
 fun AppToolBar(
     toolbarTitle: String = "",
     size: Dp = 25.sdp,
-    onClick: () -> Unit
-) {
+    backgroundColor : Color = Color.White,
+    onClick: () -> Unit,
 
+) {
     TopAppBar(
         title = {
             SimpleTextComponent(text = toolbarTitle)
@@ -78,17 +85,24 @@ fun AppToolBar(
                 imageVector = Icons.Filled.ArrowBack,
                 contentDescription = "Arrow Back",
                 modifier = Modifier
-                    .padding(start = 5.sdp, top = 3.sdp)
+                    .padding(start = 5.sdp, top = 5.sdp)
 //                    .padding(vertical = 8.sdp)
                     .size(size)
                     .clickable(enabled = true, onClick = onClick),
-
                 )
-
         },
         modifier = Modifier.height(50.sdp),
-
-        )
+        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = backgroundColor),
+        actions = {
+            Box(
+                modifier = Modifier.fillMaxSize()
+                    .padding(top = 6.sdp),
+                contentAlignment = Alignment.Center
+            ) {
+                SimpleTextComponent(text = toolbarTitle, color = textTitleColor)
+            }
+        }
+    )
 }
 
 @Composable
@@ -102,7 +116,6 @@ fun TermsAndConditionsText(
     padding: Dp = 0.sdp,
     onTermsClick: () -> Unit,
 ) {
-
     Row(
         modifier = Modifier
             .padding(all = padding)
@@ -197,7 +210,7 @@ fun ElevatedCardComponant(
     paddingVertical: Dp = 0.sdp,
     padding: Dp = 0.sdp,
 ) {
-    val listNum = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9",)
+    val listNum = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -393,7 +406,7 @@ fun SimpleEditText(
 }
 
 @Composable
-fun     SimpleButton(
+fun SimpleButton(
     paddingStart: Dp = 0.sdp,
     paddingTop: Dp = 0.sdp,
     paddingEnd: Dp = 0.sdp,
@@ -448,7 +461,7 @@ fun Preview() {
 
     Column {
 
-        AppToolBar(){}
+        AppToolBar() {}
         SimpleTextComponent(text = "Hello")
         SimpleImageView()
 //        SimpleEditText()
