@@ -221,7 +221,7 @@ fun BadgesLayout(
                 end = paddingEnd,
                 bottom = paddingBottom
             )
-            .height(110.sdp)
+            .height(90.sdp)
 
             .background(color = lightPink, shape = RoundedCornerShape(50f)),
         verticalAlignment = Alignment.CenterVertically,
@@ -240,13 +240,73 @@ fun BadgesLayout(
             .padding(vertical = 15.sdp)
             .fillMaxSize()) {
 
-            SimpleTextComponent(text = textTitle, color = textTitleColor, fontSize = 18.ssp)
-            SimpleTextComponent(text = textBody, color = lightGrey  , fontSize = 14.ssp)
+            SimpleTextComponent(text = textTitle, color = textTitleColor, fontSize = 15.ssp)
+            SimpleTextComponent(text = textBody, color = lightGrey  , fontSize = 10.ssp)
 
             Row (modifier = Modifier
-                .padding(top = 20.sdp)){
-                SimpleTextComponent(text = textDate, color = lightGrey, fontSize = 14.ssp)
-                SimpleTextComponent(text = textTime, color = lightGrey  , fontSize = 14.ssp, paddingStart = 10.sdp)
+                .padding(top = 15.sdp)){
+                SimpleTextComponent(text = textDate, color = lightGrey, fontSize = 12.ssp)
+                SimpleTextComponent(text = textTime, color = lightGrey  , fontSize = 12.ssp, paddingStart = 10.sdp)
+            }
+
+        }
+
+    }
+
+}
+
+@Composable
+fun HistoryLayout(
+    paddingStart: Dp = 0.sdp,
+    paddingTop: Dp = 0.sdp,
+    paddingEnd: Dp = 0.sdp,
+    paddingBottom: Dp = 0.sdp,
+    paddingHorizontal: Dp = 0.sdp,
+    paddingVertical: Dp = 0.sdp,
+    padding: Dp = 0.sdp,
+    textTitle: String = "Text Title",
+    textBody: String = "Text Body",
+    textDate: String = "Text Date",
+    textTime: String = "Text Time",
+    image: Int = R.drawable.ic_exercise,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = padding)
+            .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
+            .padding(
+                start = paddingStart,
+                top = paddingTop,
+                end = paddingEnd,
+                bottom = paddingBottom
+            )
+            .height(90.sdp)
+
+            .background(color = lightPink, shape = RoundedCornerShape(50f)),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+
+        Image(
+            modifier = Modifier
+                .padding(start = 20.sdp)
+                .size(50.sdp),
+
+            painter = painterResource(id = image),
+            contentDescription = null
+        )
+        Column(modifier = Modifier
+            .padding(start = 20.sdp)
+            .padding(vertical = 15.sdp)
+            .fillMaxSize()) {
+
+            SimpleTextComponent(text = textTitle, color = textTitleColor, fontSize = 15.ssp)
+            SimpleTextComponent(text = textBody, color = lightGrey  , fontSize = 10.ssp)
+
+            Row (modifier = Modifier
+                .padding(top = 15.sdp)){
+                SimpleTextComponent(text = textDate, color = lightGrey, fontSize = 12.ssp)
+                SimpleTextComponent(text = textTime, color = lightGrey  , fontSize = 12.ssp, paddingStart = 10.sdp)
             }
 
         }

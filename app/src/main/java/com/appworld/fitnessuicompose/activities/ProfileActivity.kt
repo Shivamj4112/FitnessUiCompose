@@ -1,6 +1,7 @@
 package com.appworld.fitnessuicompose.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -49,88 +50,101 @@ class ProfileActivity : ComponentActivity() {
         setContent {
             FitnessUiComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                Scaffold(
+                    topBar = {
+                        TopBar(
+                            size = 22.sdp, onClick = {
+                                Toast.makeText(this@ProfileActivity, "This Settings", Toast.LENGTH_SHORT).show()
+                            })
+                    }
                 ) {
-                    Scaffold(
-                        topBar = {
-                            TopBar(
-                                size = 22.sdp, onClick = {
-
-                                })
-                        }
+                    Column(
+                        modifier = Modifier
+                            .padding(it)
+                            .fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Column(
+
+                        Image(
                             modifier = Modifier
-                                .padding(it)
-                                .fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally
+                                .height(80.sdp)
+                                .width(80.sdp)
+                                .clip(shape = CircleShape),
+                            contentScale = ContentScale.Crop,
+                            painter = painterResource(id = R.drawable.intro_img),
+                            contentDescription = null
+                        )
+
+                        SimpleTextComponent(
+                            text = "Jhon Smith",
+                            fontSize = 18.ssp,
+                            paddingTop = 10.sdp,
+                            color = textTitleColor
+                        )
+                        SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp)
+
+                        UserDetails(paddingTop = 20.sdp, paddingHorizontal = 15.sdp)
+
+                        var currentSelectedId: String by remember { mutableStateOf("bt_badges") }
+
+                        Row(
+                            modifier = Modifier
+                                .padding(horizontal = 15.sdp)
+                                .padding(top = 20.sdp)
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
 
-                            Image(
-                                modifier = Modifier
-                                    .height(80.sdp)
-                                    .width(80.sdp)
-                                    .clip(shape = CircleShape),
-                                contentScale = ContentScale.Crop,
-                                painter = painterResource(id = R.drawable.intro_img),
-                                contentDescription = null
-                            )
 
-                            SimpleTextComponent(
-                                text = "Jhon Smith",
-                                fontSize = 18.ssp,
-                                paddingTop = 10.sdp,
-                                color = textTitleColor
-                            )
-                            SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp)
-
-                            UserDetails(paddingTop = 20.sdp, paddingHorizontal = 15.sdp)
-
-                            var currentSelectedId: String by remember { mutableStateOf("bt_badges") }
-                            Row(
-                                modifier = Modifier
-                                    .padding(horizontal = 15.sdp)
-                                    .padding(top = 20.sdp)
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-
-                                ProfileButton(
-                                    id = "bt_badges",
-                                    selectedId = currentSelectedId,
-                                    text = "BADGES",
-                                    textSize = 12.ssp,
-                                    textPaddingVertical = 5.sdp
-                                ) { clickedId ->
-
-                                    currentSelectedId = clickedId
-                                }
-                                ProfileButton(
-                                    id = "bt_history",
-                                    selectedId = currentSelectedId,
-                                    text = "HISTORY",
-                                    textSize = 12.ssp,
-                                    textPaddingVertical = 5.sdp
-                                ) { clickedId ->
-                                    currentSelectedId = clickedId
-                                }
-                                ProfileButton(
-                                    id = "bt_stats",
-                                    selectedId = currentSelectedId,
-                                    text = "STATS",
-                                    textSize = 12.ssp,
-                                    textPaddingVertical = 5.sdp
-                                ) { clickedId ->
-                                    currentSelectedId = clickedId
-                                }
+                            ProfileButton(
+                                id = "bt_badges",
+                                selectedId = currentSelectedId,
+                                text = "BADGES",
+                                textSize = 12.ssp,
+                                textPaddingVertical = 5.sdp
+                            ) {clickedId ->
+                                currentSelectedId = clickedId
                             }
 
+                            ProfileButton(id = "bt_history",selectedId = currentSelectedId, text = "HISTORY", textSize = 12.ssp, textPaddingVertical = 5.sdp   ) {clickedId ->
+                                currentSelectedId = clickedId
+                            }
+                            ProfileButton(
+                                id = "bt_stats",
+                                selectedId = currentSelectedId,
+                                text = "STATS",
+                                textSize = 12.ssp,
+                                textPaddingVertical = 5.sdp
+                            ) {clickedId ->
+                                currentSelectedId = clickedId
+                            }
+                        }
+
+                        val data = listOf(
+                            BadgeItem("Best Workout", "27 exercises completed", "10/08/2020", "17:24", R.drawable.ic_exercise),
+                            BadgeItem("Workout of the week", "727 exercises completed", "07/08/2020", "12:11", R.drawable.ic_bike),
+                            BadgeItem("99 days", "45 exercises completed", "03/08/2020", "07:39", R.drawable.ic_weightlifting),
+                            BadgeItem("Best of Yoga", "359 exercises completed", "24/07/2020", "15:02", R.drawable.ic_yoga),
+                        )
+
+                        LazyColumn (modifier = Modifier.padding(top = 20.sdp)){
+                            items(data) { item ->
+                                BadgesLayout(
+                                    textTitle = item.title,
+                                    textBody = item.body,
+                                    textDate = item.date,
+                                    textTime = item.time,
+                                    image = item.image,
+                                    paddingHorizontal = 15.sdp,
+                                    paddingBottom = 10.sdp
+                                )
+                            }
                         }
 
 
                     }
+
+
                 }
             }
         }
@@ -209,14 +223,13 @@ fun ProfilePreview() {
             }
 
             val data = listOf(
-                BadgeItem("Title 1", "Body 1", "Date 1", "Time 1", R.drawable.ic_exercise),
-                BadgeItem("Title 2", "Body 2", "Date 2", "Time 2", R.drawable.ic_bike),
-                BadgeItem("Title 3", "Body 3", "Date 3", "Time 3", R.drawable.ic_exercise),
-                BadgeItem("Title 4", "Body 4", "Date 4", "Time 4", R.drawable.ic_exercise),
-                BadgeItem("Title 5", "Body 5", "Date 5", "Time 5", R.drawable.ic_exercise)
+                BadgeItem("Best Workout", "27 exercises completed", "10/08/2020", "17:24", R.drawable.ic_exercise),
+                BadgeItem("Workout of the week", "727 exercises completed", "07/08/2020", "12:11", R.drawable.ic_bike),
+                BadgeItem("99 days", "45 exercises completed", "03/08/2020", "07:39", R.drawable.ic_weightlifting),
+                BadgeItem("Best of Yoga", "359 exercises completed", "24/07/2020", "15:02", R.drawable.ic_yoga),
             )
 
-            LazyColumn {
+            LazyColumn (modifier = Modifier.padding(top = 20.sdp)){
                 items(data) { item ->
                     BadgesLayout(
                         textTitle = item.title,
@@ -224,11 +237,11 @@ fun ProfilePreview() {
                         textDate = item.date,
                         textTime = item.time,
                         image = item.image,
+                        paddingHorizontal = 15.sdp,
+                        paddingBottom = 10.sdp
                     )
                 }
             }
-
-
         }
 
 
