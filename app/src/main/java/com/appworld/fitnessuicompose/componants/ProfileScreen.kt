@@ -24,12 +24,14 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -37,6 +39,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.ui.theme.buttonPink
+import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
 import com.appworld.fitnessuicompose.ui.theme.lightGrey
 import com.appworld.fitnessuicompose.ui.theme.lightPink
 import com.appworld.fitnessuicompose.ui.theme.textTitleColor
@@ -117,7 +120,6 @@ fun UserDetails(
                     SimpleTextComponent(text = "78 kg", color = Color.White, fontSize = 14.ssp)
                     SimpleTextComponent(text = "Weight", color = lightPink, fontSize = 11.ssp)
                 }
-
             }
         }
     }
@@ -268,8 +270,8 @@ fun HistoryLayout(
     padding: Dp = 0.sdp,
     textTitle: String = "Text Title",
     textBody: String = "Text Body",
-    textDate: String = "Text Date",
-    textMonth: String = "Text Month",
+    textDate: String = "12",
+    textMonth: String = "AUG",
     onClick: () -> Unit,
 ) {
     Row(
@@ -297,8 +299,8 @@ fun HistoryLayout(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
         ){
-            SimpleTextComponent(text = "12", color = Color.White, fontSize = 15.ssp)
-            SimpleTextComponent(text = "AUG", color = Color.White, fontSize = 8.ssp)
+            SimpleTextComponent(text = textDate, color = Color.White, fontSize = 15.ssp)
+            SimpleTextComponent(text = textMonth, color = Color.White, fontSize = 8.ssp)
         }
         Column(modifier = Modifier
             .padding(start = 20.sdp)
@@ -310,9 +312,81 @@ fun HistoryLayout(
             SimpleTextComponent(text = textBody, color = lightGrey  , fontSize = 10.ssp,paddingTop = 5.sdp)
             
         }
-
     }
+}
+@Composable
+fun StatsButton(
+    id: String,
+    paddingStart: Dp = 0.sdp,
+    paddingTop: Dp = 0.sdp,
+    paddingEnd: Dp = 0.sdp,
+    paddingBottom: Dp = 0.sdp,
+    paddingHorizontal: Dp = 0.sdp,
+    paddingVertical: Dp = 0.sdp,
+    padding: Dp = 0.sdp,
+    text: String = "JAN",
+    textPaddingVertical: Dp = 0.sdp,
+    textSize: TextUnit = 14.ssp,
+    selectedId: String = "JAN",
+    onClick: (String) -> Unit,
+) {
+    Button(
+        modifier = Modifier
+            .padding(all = padding)
+            .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
+            .padding(
+                start = paddingStart,
+                top = paddingTop,
+                end = paddingEnd,
+                bottom = paddingBottom
+            )
+            .wrapContentSize()  ,
+        shape = RoundedCornerShape(5.sdp),
+        onClick = { onClick(id) },
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if (selectedId == id) buttonPink else lightPink
+        ),
+    ) {
+        FillWidthTextComponent(
+            text = text,
+            color = if (selectedId == id) Color.White else buttonPink,
+            fontSize = textSize,
+            paddingVertical = textPaddingVertical,
+        )
+    }
+}
 
+@Composable
+fun FillWidthTextComponent(
+    text: String,
+    color: Color = lightGrey,
+    fontSize: TextUnit = 14.ssp,
+    fontFamily: FontFamily = circular_std_medium,
+    paddingStart: Dp = 0.sdp,
+    paddingTop: Dp = 0.sdp,
+    paddingEnd: Dp = 0.sdp,
+    paddingBottom: Dp = 0.sdp,
+    paddingHorizontal: Dp = 0.sdp,
+    paddingVertical: Dp = 0.sdp,
+    padding: Dp = 0.sdp,
+    textAlign: TextAlign = TextAlign.Center
+) {
+    Text(
+        modifier = Modifier
+            .padding(all = padding)
+            .padding(
+                start = paddingStart,
+                top = paddingTop,
+                end = paddingEnd,
+                bottom = paddingBottom
+            )
+            .padding(horizontal = paddingHorizontal, vertical = paddingVertical),
+        textAlign = textAlign,
+        text = text,
+        color = color,
+        fontSize = fontSize,
+        fontFamily = fontFamily,
+    )
 }
 
 
@@ -326,6 +400,8 @@ fun ProfileScreenPreview() {
         ProfileButton(id = "") {}
         BadgesLayout(){}
         HistoryLayout(paddingTop = 10.sdp){}
+        StatsButton(id = "JAN", text = "JAN",textSize = 8.ssp,
+            paddingEnd = 10.sdp,){}
 
     }
 

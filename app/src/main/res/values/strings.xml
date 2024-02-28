@@ -7,4 +7,5 @@
     <string name="title_activity_verify_phone">VerifyPhoneActivity</string>
     <string name="title_activity_bluetooth">BluetoothActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
 </resources>

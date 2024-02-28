@@ -124,7 +124,6 @@ class MainActivity : ComponentActivity() {
                                 ElevatedCardComponant(paddingTop = 10.sdp)
 
                                 val state = rememberScrollState()
-                                LaunchedEffect(Unit) { state.animateScrollTo(100) }
                                 Column(modifier = Modifier
                                     .verticalScroll(state)
                                     .fillMaxSize()
@@ -220,7 +219,6 @@ fun MainPreview() {
                         ElevatedCardComponant(paddingTop = 10.sdp)
 
                         val state = rememberScrollState()
-                        LaunchedEffect(Unit) { state.animateScrollTo(100) }
                         Column(modifier = Modifier
                             .verticalScroll(state)
                             .fillMaxSize()
