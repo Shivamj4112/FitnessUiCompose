@@ -32,7 +32,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -56,6 +55,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import com.appworld.fitnessuicompose.R
 import com.appworld.fitnessuicompose.ui.theme.buttonPink
 import com.appworld.fitnessuicompose.ui.theme.circular_std_medium
@@ -76,6 +76,7 @@ fun AppToolBar(
     onClick: () -> Unit,
 
 ) {
+
     TopAppBar(
         title = {
             SimpleTextComponent(text = toolbarTitle)
@@ -186,6 +187,7 @@ fun OtpTextComponent(
             onTextChange(newValue)
         },
         configurations = OhTeePeeConfigurations.withDefaults(
+
             cellsCount = 6,
             activeCellConfig = activeCellConfig,
             emptyCellConfig = defaultCellConfig,

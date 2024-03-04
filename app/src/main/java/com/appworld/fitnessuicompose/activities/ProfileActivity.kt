@@ -76,8 +76,8 @@ class ProfileActivity : ComponentActivity() {
 
                         Image(
                             modifier = Modifier
-                                .height(80.sdp)
-                                .width(80.sdp)
+                                .height(70.sdp)
+                                .width(70.sdp)
                                 .clip(shape = CircleShape),
                             contentScale = ContentScale.Crop,
                             painter = painterResource(id = R.drawable.intro_img),
@@ -87,7 +87,7 @@ class ProfileActivity : ComponentActivity() {
                         SimpleTextComponent(
                             text = "Jhon Smith",
                             fontSize = 18.ssp,
-                            paddingTop = 10.sdp,
+                            paddingTop = 7.sdp,
                             color = textTitleColor
                         )
                         SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp)
@@ -227,8 +227,8 @@ class ProfileActivity : ComponentActivity() {
                 .padding(horizontal = 15.sdp)
                 .padding(top = 10.sdp)
                 .fillMaxWidth()
-                .width(100.sdp),
-            contentScale = ContentScale.Crop,
+                .height(150.sdp),
+            contentScale = ContentScale.FillBounds,
             painter = painterResource(id = R.drawable.img_graph),
             contentDescription = null
         )
@@ -250,7 +250,7 @@ class ProfileActivity : ComponentActivity() {
 
         LazyRow(
             modifier = Modifier
-                .padding(top = 20.sdp)
+                .padding(top = 10.sdp)
                 .padding(horizontal = 15.sdp)
         ) {
             items(dataStats) { item ->
@@ -326,8 +326,8 @@ fun ProfilePreview() {
 
             Image(
                 modifier = Modifier
-                    .height(80.sdp)
-                    .width(80.sdp)
+                    .height(70.sdp)
+                    .width(70.sdp)
                     .clip(shape = CircleShape),
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.intro_img),
@@ -337,7 +337,7 @@ fun ProfilePreview() {
             SimpleTextComponent(
                 text = "Jhon Smith",
                 fontSize = 18.ssp,
-                paddingTop = 10.sdp,
+                paddingTop = 7.sdp,
                 color = textTitleColor
             )
             SimpleTextComponent(text = "Member since June 2020", fontSize = 14.ssp)

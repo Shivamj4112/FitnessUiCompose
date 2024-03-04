@@ -2,6 +2,7 @@ package com.appworld.fitnessuicompose.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
